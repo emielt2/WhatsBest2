@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jdbc_jar">
+    <CLASSES>
+      <root url="file://F:/SeleniumDownloadFolder/jdbc_jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://F:/SeleniumDownloadFolder/jdbc_jar" />
+    </SOURCES>
+    <jarDirectory url="file://F:/SeleniumDownloadFolder/jdbc_jar" recursive="false" />
+    <jarDirectory url="file://F:/SeleniumDownloadFolder/jdbc_jar" recursive="false" type="SOURCES" />
+  </library>
+</component>

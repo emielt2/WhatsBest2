@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="SeleniumDownloadFolder">
+    <CLASSES>
+      <root url="file://F:/SeleniumDownloadFolder" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://F:/SeleniumDownloadFolder/poi-bin-3.12-beta1-20150228/poi-3.12-beta1/docs/apidocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/contrib/poi-ruby/java" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/examples/src" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/excelant/java" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/excelant/testcases" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/integrationtest" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/java" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/ooxml/java" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/ooxml/testcases" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/scratchpad/src" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/scratchpad/testcases" />
+      <root url="file://F:/SeleniumDownloadFolder/poi-3.12-beta1/src/testcases" />
+      <root url="file://F:/SeleniumDownloadFolder" />
+    </SOURCES>
+    <jarDirectory url="file://F:/SeleniumDownloadFolder" recursive="false" />
+    <jarDirectory url="file://F:/SeleniumDownloadFolder" recursive="false" type="SOURCES" />
+  </library>
+</component>
