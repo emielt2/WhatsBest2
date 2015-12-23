@@ -292,7 +292,8 @@ public class WhatsBest2 {
 		String soapResultConv = element1.getElementsByTagName("ConversionRateResult").item(0).getTextContent();
 		System.out.println("SOAP says = " + soapResultConv);
 
-		double resultSoapConvDOUBLE = Double.parseDouble(soapResultConv.substring(0,4));
+		double resultSoapConvDOUBLE = Double.parseDouble(soapResultConv.substring(0,2));
+		//ETCHANGED WAS double resultSoapConvDOUBLE = Double.parseDouble(soapResultConv.substring(0,4));
 
 		return resultSoapConvDOUBLE;
 	}

@@ -8,7 +8,9 @@ public class SQLiteJDBC_Insert_CONV_VALUES
     Statement stmt = null;
     try {
       Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:test.db");
+      //c = DriverManager.getConnection("jdbc:sqlite:test.db");
+      c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Test2?user=postgres&password=secret");
+
       c.setAutoCommit(false);
       System.out.println("Opened database successfully");
 

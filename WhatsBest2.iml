@@ -620,5 +620,6 @@
     <orderEntry type="library" name="selenium-2.45" level="project" />
     <orderEntry type="library" name="poi-3" level="project" />
     <orderEntry type="library" name="jdbc_jar" level="project" />
+    <orderEntry type="library" name="postgresql-9" level="project" />
   </component>
 </module>

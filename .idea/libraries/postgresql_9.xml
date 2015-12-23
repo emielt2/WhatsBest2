@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="postgresql-9">
+    <CLASSES>
+      <root url="file://F:/SeleniumDownloadFolder/postgresql-9.4-1206-jdbc42" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://F:/SeleniumDownloadFolder/postgresql-9.4-1206-jdbc42" recursive="false" />
+  </library>
+</component>
