@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class SQLiteJDBC_Create
 {
-  public static void main( String args[] )
+  public static void mainx( String args[] )
   {
     Connection c = null;
     Statement stmt = null;
