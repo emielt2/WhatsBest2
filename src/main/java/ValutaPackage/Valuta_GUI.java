@@ -26,7 +26,7 @@ public class Valuta_GUI extends Application {
     static int counter=10;
     @Override
     public void start(Stage primaryStage) {
-        final WhatsBest2 wb2 = new WhatsBest2();
+        final WhatsBestClass wbc = new WhatsBestClass();
         primaryStage.setTitle("ET Valuta Comparer");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.TOP_LEFT);
@@ -65,7 +65,7 @@ public class Valuta_GUI extends Application {
                 actiontarget.setFill(Color.BLUE);
                 actiontarget.setText("Processing... " + counter ++);
                 try {
-                    wb2.testMain();
+                    wbc.testMain();
                     //scenetitle2.setText("Y");
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -73,13 +73,18 @@ public class Valuta_GUI extends Application {
 
             }
         });
-        SQLiteJDBC_Select_RESULT_VALUES resultValues = new SQLiteJDBC_Select_RESULT_VALUES();
+        final SQLiteJDBC_Select_RESULT_VALUES resultValues = new SQLiteJDBC_Select_RESULT_VALUES();
+
         buttonShow.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.BLUE);
                 actiontarget.setText("Processing... " + counter ++);
-                scenetitle2.setText("Y");
+                ValutaResultObject vro1;
+                vro1 = resultValues.getRESULT_VALUES();
+                scenetitle2.setText(vro1.toString());
+                //scenetitle2.setText(results[1]);
+
             }
         });
 

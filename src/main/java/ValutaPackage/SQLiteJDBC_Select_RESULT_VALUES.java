@@ -7,8 +7,9 @@ import java.sql.Statement;
 
 public class SQLiteJDBC_Select_RESULT_VALUES
 {
-  public static void main( String args[] )
+  public ValutaResultObject getRESULT_VALUES( String ...args )
   {
+    ValutaResultObject vro = new ValutaResultObject();
     Connection c = null;
     Statement stmt = null;
     try {
@@ -33,21 +34,21 @@ public class SQLiteJDBC_Select_RESULT_VALUES
          System.out.println( "SALARY = " + salary );
          System.out.println();
       }*/
-      
+      /*
       Integer identifier;
       String  FROMCUR;
       String  TOCUR;
       Double googleResult;
       Double soapResult;
-      
+      */
       while ( rs.next() ) {
     	  //int id = rs.getInt("id");
-    	  identifier = rs.getInt("ID");
-          FROMCUR = rs.getString("fromcur");
-          TOCUR = rs.getString("tocur");
-          googleResult = rs.getDouble("google");
-          soapResult = rs.getDouble("soap");
-          System.out.println(identifier + " " + FROMCUR + " " +TOCUR+ " " +googleResult+ " " +soapResult );
+    	  vro.UID = rs.getInt("ID");
+          vro.fromVal = rs.getString("fromcur");
+          vro.toVal = rs.getString("tocur");
+          vro.googleResult = rs.getDouble("google");
+          vro.soapResult = rs.getDouble("soap");
+          System.out.println(vro.UID + " " + vro.fromVal + " " +vro.toVal+ " " +vro.googleResult+ " " +vro.soapResult );
           //System.out.println( "NAME = " + name );
 
           //System.out.println( "fullname = " + fullname );
@@ -64,5 +65,10 @@ public class SQLiteJDBC_Select_RESULT_VALUES
       System.exit(0);
     }
     System.out.println("Operation done successfully");
+    //String[] returnString = new String{"a"+"b"};
+    //return returnString;
+    //return new String[]{"aa","bb"};
+    return vro;
   }
+
 }
