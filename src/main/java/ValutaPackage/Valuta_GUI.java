@@ -48,11 +48,11 @@ public class Valuta_GUI extends Application {
         HBox hbButtonGo = new HBox(10);
         HBox hbButtonShow = new HBox(30);
         hbButtonGo.setAlignment(Pos.TOP_LEFT);
-        hbButtonShow.setAlignment(Pos.BOTTOM_RIGHT);
+        hbButtonShow.setAlignment(Pos.TOP_LEFT);
         hbButtonGo.getChildren().add(buttonGo);
         hbButtonShow.getChildren().add(buttonShow);
-        grid1.add(hbButtonGo, 1, 4);
-        grid1.add(hbButtonShow, 4, 6);
+        grid1.add(hbButtonGo, 0, 5);
+        grid1.add(hbButtonShow, 0, 6);
 
         Separator sepHor1 = new Separator();
         Separator sepHor2 = new Separator();
@@ -60,9 +60,7 @@ public class Valuta_GUI extends Application {
 
         sepVer.setOrientation(Orientation.VERTICAL);//Vertical separator
         //--new gridpane
-        GridPane grid2 = new GridPane();
-        Text UID = new Text("UID");
-        grid2.getChildren().add(UID);
+
 
         //--
 
@@ -75,11 +73,11 @@ public class Valuta_GUI extends Application {
         //-------
         Text scenetitle = new Text("Welcome Citizen47281");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid1.add(scenetitle, 0, 0, 2, 1);
+        grid1.add(scenetitle, 0, 1/*, 1, 1*/);
 
         final Text scenetitle2 = new Text("Last results:");
         scenetitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid1.add(scenetitle2, 5, 5, 2, 1);
+        grid1.add(scenetitle2, 0, 2/*, 10, 10*/);
 
         buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -111,17 +109,7 @@ public class Valuta_GUI extends Application {
             }
         });
 
-        Label userName = new Label("FROM valuta:");
-        grid1.add(userName, 0, 1);
 
-        TextField userTextField = new TextField();
-        grid1.add(userTextField, 1, 1);
-
-        Label pw = new Label("TO valuta:");
-        grid1.add(pw, 0, 2);
-
-        PasswordField pwBox = new PasswordField();
-        grid1.add(pwBox, 1, 2);
 
         //Scene scene = new Scene(grid, 800, 275);
         //Scene scene = new Scene(grid, 800, 275);
@@ -163,10 +151,40 @@ public class Valuta_GUI extends Application {
 
 
        // root.getChildren().add(grid);
+        GridPane grid2 = new GridPane();
+        //Text UID = new Text("UID");
+        //grid2.getChildren().add(UID);
 
-        grid1.getChildren().addAll(table);
+        Label userName = new Label("FROM valuta:");
+        grid1.add(userName, 0, 3);
+
+        TextField userTextField = new TextField();
+        grid1.add(userTextField, 1, 3);
+
+        Label pw = new Label("TO valuta:");
+        grid1.add(pw, 0, 4);
+
+        PasswordField pwBox = new PasswordField();
+        grid1.add(pwBox, 1, 4);
+
+        //grid1.getChildren().addAll(/*table,*/sepHor1,sepHor2);
+        //grid1.getChildren().add(sepHor1);
+        //
+
+        //grid2.add(table,0,0);
+        //grid1.add(grid2,2,0);
+        grid1.add(table,2,0,1,70);
+        //grid2.getChildren().addAll(table);
+       // grid1.add(grid2,10,0);
+
+
+
+
+
         //primaryStage.setScene(new Scene(root, 500, 550));
-        primaryStage.setScene(new Scene(grid1, 1200, 550));
+        primaryStage.setScene(new Scene(grid1, 900, 900));
+        //primaryStage.setScene(new Scene(grid2, 200, 200));
+        primaryStage.getScene().fillProperty();
         primaryStage.alwaysOnTopProperty();
 
         //primaryStage.show();
@@ -174,7 +192,7 @@ public class Valuta_GUI extends Application {
 
 
         primaryStage.show();
-        scenetitle2.setText("X");
+        //scenetitle2.setText("X");
 
 
     }
