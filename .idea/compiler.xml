@@ -23,12 +23,18 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="ValutaDBDAO" />
+      </profile>
+      <profile default="false" name="Annotation profile for WhatsBest2" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
         <module name="WhatsBest2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ValutaDBDAO" target="1.5" />
-      <module name="WhatsBest2" target="1.5" />
+      <module name="WhatsBest2" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

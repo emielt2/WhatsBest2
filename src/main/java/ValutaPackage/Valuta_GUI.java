@@ -1,6 +1,10 @@
 package ValutaPackage;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -8,19 +12,23 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class Valuta_GUI extends Application {
     static int counter=10;
@@ -43,6 +51,13 @@ public class Valuta_GUI extends Application {
         hbButtonShow.getChildren().add(buttonShow);
         grid.add(hbButtonGo, 1, 4);
         grid.add(hbButtonShow, 4, 6);
+
+        //--new gridpane
+        GridPane grid2 = new GridPane();
+        Text UID = new Text("UID");
+        grid2.getChildren().add(UID);
+
+        //--
 
 
         final Text actiontarget = new Text();
@@ -100,8 +115,56 @@ public class Valuta_GUI extends Application {
         PasswordField pwBox = new PasswordField();
         grid.add(pwBox, 1, 2);
 
-        Scene scene = new Scene(grid, 800, 275);
-        primaryStage.setScene(scene);
+        //Scene scene = new Scene(grid, 800, 275);
+        //Scene scene = new Scene(grid, 800, 275);
+        //primaryStage.setScene(scene);
+
+        //--pane table
+        StackPane root = new StackPane();
+        String[][] staffArray =
+                {
+                        {"nice to ", "have", "titles"},
+                        {"a", "b", "c"},
+                        {"d", "e", "f"}
+                };
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+        data.addAll(Arrays.asList(staffArray));
+        data.remove(0);//remove titles from data
+        TableView<String[]> table = new TableView<>();
+        for (int i = 0; i < staffArray[0].length; i++) {
+            TableColumn tc = new TableColumn(staffArray[0][i]);
+            final int colNo = i;
+            tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> p) {
+                    return new SimpleStringProperty((p.getValue()[colNo]));
+                }
+            });
+            tc.setPrefWidth(90);
+            table.getColumns().add(tc);
+        }
+        table.setItems(data);
+
+
+
+        root.getChildren().addAll(table,grid2);
+        //root.getChildren().add(table);
+        root.setAlignment(Pos.BOTTOM_RIGHT);
+
+       // root.setLayoutX(112.5);
+
+
+       // root.getChildren().add(grid);
+
+
+        primaryStage.setScene(new Scene(root, 500, 550));
+       // primaryStage.setScene(new Scene(grid, 500, 550));
+        primaryStage.alwaysOnTopProperty();
+
+        //primaryStage.show();
+        //----
+
+
         primaryStage.show();
         scenetitle2.setText("X");
 
