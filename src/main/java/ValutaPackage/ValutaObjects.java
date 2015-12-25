@@ -12,7 +12,8 @@ class ValutaResultObject{
 
     @Override
     public String toString(){
-        return new String(UID+fromVal+toVal+googleResult+soapResult);
+        //return new String(UID+fromVal+toVal+googleResult+soapResult);
+        return new String(UID+ " "+ fromVal + " " + toVal + " " + googleResult + " " + soapResult);
     }
 
 }

@@ -63,7 +63,7 @@ public class WhatsBestClass {
 		driver.get(baseUrl + "/?gws_rd=ssl");
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static ValutaResultObject[] main(String[] args) throws Exception {
 
 		//Integer aantalTesten = 12;
 		//System.out.print("How many testcases? (max 12): ");
@@ -78,9 +78,10 @@ public class WhatsBestClass {
 		Double resultsSoap[] = new Double[aantalTesten];
 		String arrayTestValues[][] = new String[aantalTesten][aantalTestwaarden];
 		String TEMP;
-
+		ValutaResultObject vorArray[] = new ValutaResultObject[aantalTesten];
 		beforesetUp();
 
+		//ReadFromExcel testvalues
 		for(int i=0;i<aantalTesten;i++){
 			arrayTestValues[i][0] = getvalueTEXT(i+startPositieRow, startPositieColumn);
 			arrayTestValues[i][1] = getvalueTEXT(i+startPositieRow, startPositieColumn+1);
@@ -90,11 +91,14 @@ public class WhatsBestClass {
 			System.out.println(arrayTestValues[i][1]);
 		}
 
+		//GetResults Selenium google/Soap
 		for(int i=0;i<aantalTesten;i++){
 			resultsGoogle[i] = getGoogleResults(arrayTestValues[i][0], arrayTestValues[i][1]);
 			System.out.println("resultsGoogle[i] = " + resultsGoogle[i]);
 			resultsSoap[i] = getSoapResults(arrayTestValues[i][0], arrayTestValues[i][1]);
 			System.out.println("resultsSoap[i] = " + resultsSoap[i]);
+			//TODO vorArray[i].UID
+
 		}
 
 		tearDown();
@@ -127,7 +131,7 @@ public class WhatsBestClass {
 
 		// TODO Auto-generated method stub
 
-
+return vorArray;
 	}
 
 	public static String getvalueTEXT(int row, int col) throws IOException{

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,11 +37,12 @@ public class Valuta_GUI extends Application {
     public void start(Stage primaryStage) {
         final WhatsBestClass wbc = new WhatsBestClass();
         primaryStage.setTitle("ET Valuta Comparer");
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.TOP_LEFT);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        GridPane grid1 = new GridPane();
+        grid1.setAlignment(Pos.TOP_LEFT);
+        grid1.setHgap(10);
+        grid1.setVgap(10);
+        grid1.setPadding(new Insets(25, 25, 25, 25));
+
         Button buttonGo = new Button("Go!");
         Button buttonShow = new Button("Show");
         HBox hbButtonGo = new HBox(10);
@@ -49,9 +51,14 @@ public class Valuta_GUI extends Application {
         hbButtonShow.setAlignment(Pos.BOTTOM_RIGHT);
         hbButtonGo.getChildren().add(buttonGo);
         hbButtonShow.getChildren().add(buttonShow);
-        grid.add(hbButtonGo, 1, 4);
-        grid.add(hbButtonShow, 4, 6);
+        grid1.add(hbButtonGo, 1, 4);
+        grid1.add(hbButtonShow, 4, 6);
 
+        Separator sepHor1 = new Separator();
+        Separator sepHor2 = new Separator();
+        Separator sepVer = new Separator();//Vertical separator
+
+        sepVer.setOrientation(Orientation.VERTICAL);//Vertical separator
         //--new gridpane
         GridPane grid2 = new GridPane();
         Text UID = new Text("UID");
@@ -61,18 +68,18 @@ public class Valuta_GUI extends Application {
 
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
+        grid1.add(actiontarget, 1, 6);
 
         //TODO knop voor current results maken
         //-------
         //-------
         Text scenetitle = new Text("Welcome Citizen47281");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid.add(scenetitle, 0, 0, 2, 1);
+        grid1.add(scenetitle, 0, 0, 2, 1);
 
         final Text scenetitle2 = new Text("Last results:");
         scenetitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid.add(scenetitle2, 5, 5, 2, 1);
+        grid1.add(scenetitle2, 5, 5, 2, 1);
 
         buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -98,34 +105,35 @@ public class Valuta_GUI extends Application {
                 ValutaResultObject vro1;
                 vro1 = resultValues.getRESULT_VALUES();
                 scenetitle2.setText(vro1.toString());
+                SQLiteJDBC_Insert_RESULT_VALUES.insertResult(vro1);
                 //scenetitle2.setText(results[1]);
 
             }
         });
 
         Label userName = new Label("FROM valuta:");
-        grid.add(userName, 0, 1);
+        grid1.add(userName, 0, 1);
 
         TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        grid1.add(userTextField, 1, 1);
 
         Label pw = new Label("TO valuta:");
-        grid.add(pw, 0, 2);
+        grid1.add(pw, 0, 2);
 
         PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+        grid1.add(pwBox, 1, 2);
 
         //Scene scene = new Scene(grid, 800, 275);
         //Scene scene = new Scene(grid, 800, 275);
         //primaryStage.setScene(scene);
 
         //--pane table
-        StackPane root = new StackPane();
+        //StackPane root = new StackPane();
         String[][] staffArray =
                 {
-                        {"nice to ", "have", "titles"},
-                        {"a", "b", "c"},
-                        {"d", "e", "f"}
+                        {"Uid", "FROM", "TO","Google","Soap"},
+                        {"a", "b", "c","x","y"},
+                        {"d", "e", "f","x","y"}
                 };
         ObservableList<String[]> data = FXCollections.observableArrayList();
         data.addAll(Arrays.asList(staffArray));
@@ -147,18 +155,18 @@ public class Valuta_GUI extends Application {
 
 
 
-        root.getChildren().addAll(table,grid2);
+        //root.getChildren().addAll(grid2,sepHor2,table);
         //root.getChildren().add(table);
-        root.setAlignment(Pos.BOTTOM_RIGHT);
+        //root.setAlignment(Pos.BOTTOM_RIGHT);
 
        // root.setLayoutX(112.5);
 
 
        // root.getChildren().add(grid);
 
-
-        primaryStage.setScene(new Scene(root, 500, 550));
-       // primaryStage.setScene(new Scene(grid, 500, 550));
+        grid1.getChildren().addAll(table);
+        //primaryStage.setScene(new Scene(root, 500, 550));
+        primaryStage.setScene(new Scene(grid1, 1200, 550));
         primaryStage.alwaysOnTopProperty();
 
         //primaryStage.show();
