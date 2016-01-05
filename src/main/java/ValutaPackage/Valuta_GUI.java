@@ -35,6 +35,7 @@ public class Valuta_GUI extends Application {
     static int counter=10;
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("STARTED");
         final WhatsBestClass wbc = new WhatsBestClass();
         primaryStage.setTitle("ET Valuta Comparer");
         GridPane grid1 = new GridPane();
@@ -44,7 +45,7 @@ public class Valuta_GUI extends Application {
         grid1.setPadding(new Insets(25, 25, 25, 25));
 
         Button buttonGo = new Button("Go!");
-        Button buttonShow = new Button("Show");
+        Button buttonShow = new Button("ShowLast");
         HBox hbButtonGo = new HBox(10);
         HBox hbButtonShow = new HBox(30);
         hbButtonGo.setAlignment(Pos.TOP_LEFT);
@@ -77,7 +78,10 @@ public class Valuta_GUI extends Application {
 
         final Text scenetitle2 = new Text("Last results:");
         scenetitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid1.add(scenetitle2, 0, 2/*, 10, 10*/);
+        grid1.add(scenetitle2, 0, 7/*, 10, 10*/);
+
+        final TextField fromInputField = new TextField();
+        final TextField toInputField = new TextField();
 
         buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -85,7 +89,19 @@ public class Valuta_GUI extends Application {
                 actiontarget.setFill(Color.BLUE);
                 actiontarget.setText("Processing... " + counter ++);
                 try {
-                    wbc.testMain();
+                    ValutaResultObject vro1;// = new ValutaResultObject[1];
+                    //TEMP vro1=wbc.main("1"); //TODO
+                    //String input1 = userTextField.
+                    //vro1=wbc.main("1","USD", "EUR");
+                    vro1=wbc.main("1",fromInputField.getText(), toInputField.getText());
+                    //vro1[0].fromVal="EEE";
+                    System.out.println("---Check d1: " + vro1.toString());
+                    System.out.println();
+                    //SQLiteJDBC_Insert_RESULT_VALUES insert1 = new ;
+                    for(int i=0;i<1;i++){
+                        new SQLiteJDBC_Insert_RESULT_VALUES().insertResult(vro1);
+                    }
+                    //wbc.testMain();
                     //scenetitle2.setText("Y");
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -100,20 +116,16 @@ public class Valuta_GUI extends Application {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.BLUE);
                 actiontarget.setText("Processing... " + counter ++);
-                ValutaResultObject vro1;
+                ValutaResultObject[] vro1 = new ValutaResultObject[1];
                 vro1 = resultValues.getRESULT_VALUES();
-                scenetitle2.setText(vro1.toString());
-                SQLiteJDBC_Insert_RESULT_VALUES.insertResult(vro1);
+                scenetitle2.setText(vro1[SQLiteJDBC_Insert_RESULT_VALUES.getLastID()].toString());
+                //SQLiteJDBC_Insert_RESULT_VALUES.insertResult(vro1);
                 //scenetitle2.setText(results[1]);
 
             }
         });
 
 
-
-        //Scene scene = new Scene(grid, 800, 275);
-        //Scene scene = new Scene(grid, 800, 275);
-        //primaryStage.setScene(scene);
 
         //--pane table
         //StackPane root = new StackPane();
@@ -123,9 +135,23 @@ public class Valuta_GUI extends Application {
                         {"a", "b", "c","x","y"},
                         {"d", "e", "f","x","y"}
                 };
+       // ValutaResultObject[] vroAllResults = new ValutaResultObject[10];
+
+        System.out.println("Check E1");
+        ValutaResultObject vroAllResults[] = new SQLiteJDBC_Select_RESULT_VALUES().getRESULT_VALUES();
+        System.out.println("Check E2");
+        String[][] allResultsArray =
+                {
+                        {Integer.toString(vroAllResults[0].UID) ,vroAllResults[0].fromVal,vroAllResults[0].toVal,
+                                Double.toString(vroAllResults[0].googleResult),Double.toString(vroAllResults[0].soapResult)
+
+                        }
+
+                };
         ObservableList<String[]> data = FXCollections.observableArrayList();
         data.addAll(Arrays.asList(staffArray));
         data.remove(0);//remove titles from data
+
         TableView<String[]> table = new TableView<>();
         for (int i = 0; i < staffArray[0].length; i++) {
             TableColumn tc = new TableColumn(staffArray[0][i]);
@@ -158,43 +184,30 @@ public class Valuta_GUI extends Application {
         Label userName = new Label("FROM valuta:");
         grid1.add(userName, 0, 3);
 
-        TextField userTextField = new TextField();
-        grid1.add(userTextField, 1, 3);
+
+        grid1.add(fromInputField, 1, 3);
+        //String input1=fromInputField.getText();
+        //String input2=fromInputField.getText();
 
         Label pw = new Label("TO valuta:");
         grid1.add(pw, 0, 4);
 
-        PasswordField pwBox = new PasswordField();
-        grid1.add(pwBox, 1, 4);
 
-        //grid1.getChildren().addAll(/*table,*/sepHor1,sepHor2);
-        //grid1.getChildren().add(sepHor1);
-        //
+        grid1.add(toInputField, 1, 4);
+
 
         //grid2.add(table,0,0);
         //grid1.add(grid2,2,0);
         grid1.add(table,2,0,1,70);
         //grid2.getChildren().addAll(table);
-       // grid1.add(grid2,10,0);
-
-
-
-
 
         //primaryStage.setScene(new Scene(root, 500, 550));
         primaryStage.setScene(new Scene(grid1, 900, 900));
-        //primaryStage.setScene(new Scene(grid2, 200, 200));
         primaryStage.getScene().fillProperty();
         primaryStage.alwaysOnTopProperty();
-
-        //primaryStage.show();
-        //----
-
+        //primaryStage.setScene(scene);
 
         primaryStage.show();
-        //scenetitle2.setText("X");
-
-
     }
 
 

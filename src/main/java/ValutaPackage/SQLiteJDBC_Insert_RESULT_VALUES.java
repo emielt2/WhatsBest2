@@ -17,7 +17,7 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
     }
       catch(Exception e){
         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-        System.out.println("FAILED");
+        System.out.println("FAILEDx1");
         System.exit(0);
       }
   }
@@ -25,6 +25,7 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
   public static void closeConnection(){
     try {
       c.close();
+      System.out.println("Closed database successfully");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -86,6 +87,10 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
       //String sql = "delete from RESULT_VALUES";
       //stmt.executeUpdate(sql);
       //System.out.println("Records from RESULT_VALUES deleted successfully");
+      System.out.println("---Check y1");
+      //vro.fromVal = "EUR";
+      System.out.println(vro.fromVal);
+      System.out.println("---Check y1");
       sql = "INSERT INTO RESULT_VALUES " +
               "VALUES"+
               /*LastID+1
@@ -95,21 +100,26 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
               "(5,'AFA','EUR', '1.1','1.2')";
 
               */
-              "("+(LastID+1)+ ",'" + vro.fromVal + "','" + vro.toVal + "','1.1','1.2')";
+              "("+(LastID+1)+ ",'" + vro.fromVal + "','" + vro.toVal + "','"+vro.googleResult+"','"+ vro.soapResult+"')";
       System.out.println("STRING IS: " + sql);
       stmt.executeUpdate(sql);
 
       stmt.close();
       c.commit();
       closeConnection();
+
 //      c.close();
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.out.println("FAILED");
+      System.out.println("FAILEDx2");
       System.exit(0);
     }
     System.out.println("Records created successfully");
   }
+
+
+
+  //-----------------------------------------------------------------------------------------
   public static void main( String args[] )
   {
     Connection c = null;
@@ -126,10 +136,10 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
       System.out.println("Records from RESULT_VALUES deleted successfully");
       sql = "INSERT INTO RESULT_VALUES " +
               "VALUES"+
-      		"(1,'AFA','EUR', '1.1','1.2'),"+
-              "(2, 'EUR', 'QAR', '1.12345','1.0')," +
-              "(3, 'USD','EUR','3.1','3.2')," +
-              "(4, 'QAR', 'EUR','4','4.1')";
+      		"(0,'AFA','EUR', '1.1','1.2'),"+
+              "(1, 'EUR', 'QAR', '1.12345','1.0')," +
+              "(2, 'USD','EUR','3.1','3.2')," +
+              "(3, 'QAR', 'EUR','4','4.1')";
 
       stmt.executeUpdate(sql);
 
@@ -138,7 +148,7 @@ public class SQLiteJDBC_Insert_RESULT_VALUES
       c.close();
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.out.println("FAILED");
+      System.out.println("FAILEDx3");
       System.exit(0);
     }
     System.out.println("Records created successfully");

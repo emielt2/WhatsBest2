@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openga.selenium.
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -50,7 +52,9 @@ public class WhatsBestClass {
 	public static void beforesetUp() throws Exception {
 
 		System.out.println("Check1a");
-		driver = new FirefoxDriver();
+		//driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver", "F:\\SeleniumDownloadFolder\\chromedriver_win32\\chromedriver.exe");
+		driver = new ChromeDriver();
 		System.out.println("Check1");
 		//File file = new File("C:/EmielUserDATA/H-DISK/ALL_JAVA_SELENIUM/JAR_LIB/IEDriverServer_x64_2.45.0/IEDriverServer.exe");
 		//System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
@@ -63,7 +67,7 @@ public class WhatsBestClass {
 		driver.get(baseUrl + "/?gws_rd=ssl");
 	}
 
-	public static ValutaResultObject[] main(String[] args) throws Exception {
+	public static ValutaResultObject main(String... args) throws Exception {
 
 		//Integer aantalTesten = 12;
 		//System.out.print("How many testcases? (max 12): ");
@@ -71,6 +75,7 @@ public class WhatsBestClass {
 		//String userChoiceString = scanner1.nextLine();
 		//Integer aantalTesten = Integer.parseInt(userChoiceString);
 		Integer aantalTesten = Integer.parseInt(args[0]);
+		System.out.println("aantalTestenxxx = " + aantalTesten);
 		Integer aantalTestwaarden =2;
 		Integer startPositieRow =0+1;
 		Integer startPositieColumn =0+1;
@@ -78,17 +83,25 @@ public class WhatsBestClass {
 		Double resultsSoap[] = new Double[aantalTesten];
 		String arrayTestValues[][] = new String[aantalTesten][aantalTestwaarden];
 		String TEMP;
-		ValutaResultObject vorArray[] = new ValutaResultObject[aantalTesten];
+		//ValutaResultObject vorArray[] = new ValutaResultObject[aantalTesten];
+		ValutaResultObject vorArray = new ValutaResultObject();
 		beforesetUp();
-
+		if(args.length==3){
+			arrayTestValues[0][0]=args[1];
+			arrayTestValues[0][1]=args[2];
+			System.out.println("ARGS WAS 3!");
+		}
 		//ReadFromExcel testvalues
-		for(int i=0;i<aantalTesten;i++){
-			arrayTestValues[i][0] = getvalueTEXT(i+startPositieRow, startPositieColumn);
-			arrayTestValues[i][1] = getvalueTEXT(i+startPositieRow, startPositieColumn+1);
-			//TEMP =  getvalueTEXT(i+startPositieRow, startPositieColumn);
-			//array[12][2] = gettestvalues x12 from excel
-			System.out.print(arrayTestValues[i][0]);
-			System.out.println(arrayTestValues[i][1]);
+		else{
+			for(int i=0;i<aantalTesten;i++){
+				arrayTestValues[i][0] = getvalueTEXT(i+startPositieRow, startPositieColumn);
+				arrayTestValues[i][1] = getvalueTEXT(i+startPositieRow, startPositieColumn+1);
+				//TEMP =  getvalueTEXT(i+startPositieRow, startPositieColumn);
+				//array[12][2] = gettestvalues x12 from excel
+				System.out.print(arrayTestValues[i][0]);
+				System.out.println(arrayTestValues[i][1]);
+			}
+
 		}
 
 		//GetResults Selenium google/Soap
@@ -98,6 +111,11 @@ public class WhatsBestClass {
 			resultsSoap[i] = getSoapResults(arrayTestValues[i][0], arrayTestValues[i][1]);
 			System.out.println("resultsSoap[i] = " + resultsSoap[i]);
 			//TODO vorArray[i].UID
+			vorArray.UID = new SQLiteJDBC_Insert_RESULT_VALUES().getLastID();
+			vorArray.fromVal = arrayTestValues[i][0];
+			vorArray.toVal = arrayTestValues[i][1];
+			vorArray.googleResult = resultsGoogle[i];
+			vorArray.soapResult = resultsSoap[i];
 
 		}
 
@@ -130,7 +148,7 @@ public class WhatsBestClass {
 		compare x12*/
 
 		// TODO Auto-generated method stub
-
+		System.out.println("vorArray check: " + vorArray + " fromvalue " + vorArray.fromVal);
 return vorArray;
 	}
 
